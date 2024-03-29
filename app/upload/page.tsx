@@ -2,7 +2,6 @@
 import FormInput from "@/components/form-input";
 import HeaderWrapper from "@/components/header-wrapper";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
@@ -10,8 +9,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import * as z from 'zod';
-import { UploadButton } from "@/lib/uploadthing";
-import FileUpload from "@/components/file-uploader";
 import FileUploader from "@/components/file-uploader";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
@@ -43,7 +40,7 @@ export default function UploadPage() {
         try {
 
             setLoading(true);
-            await axios.post('/api/uploadSong', values);
+            await axios.post('/api/song', values);
             toast.success('Song Uploaded!');
             form.reset()
         } catch (e) {
