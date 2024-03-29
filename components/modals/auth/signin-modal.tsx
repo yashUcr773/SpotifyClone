@@ -13,6 +13,7 @@ import FormInput from "@/components/form-input"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import toast from "react-hot-toast"
+import { AUTH_MODAL_SOCIALS } from "@/types"
 
 
 const formSchema = z.object({

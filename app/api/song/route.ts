@@ -33,13 +33,11 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
     try {
-
         const songs = await prisma.song.findMany({
             orderBy: {
                 createdAt: 'desc'
             }
         })
-
         return NextResponse.json(songs)
     } catch (e) {
         console.log(e)

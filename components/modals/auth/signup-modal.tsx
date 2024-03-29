@@ -14,6 +14,7 @@ import toast from "react-hot-toast"
 import axios from 'axios'
 import { signIn } from 'next-auth/react'
 import { useState } from "react"
+import { AUTH_MODAL_SOCIALS } from "@/types"
 
 const formSchema = z.object({
     firstname: z.string().min(1, { message: 'Firstname is required' }),

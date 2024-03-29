@@ -3,6 +3,7 @@
 import { Play } from "lucide-react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
+import PlayButton from "./play-button"
 
 interface PlaylistItemProps {
     image: string,
@@ -25,8 +26,8 @@ export default function PlaylistItem({ image, name }: PlaylistItemProps) {
                 <Image className="object-cover" fill src={image} alt="Image"></Image>
             </div>
             <p className="font-medium truncate py-4 text-bold text-white text-lg">{name}</p>
-            <div className="transition absolute opacity-0 rounded-full flex items-center justify-center bg-green-500 p-3 drop-shadow-md right-4 group-hover:opacity-100 hover:scale-110">
-                <Play size={24} className="text-black fill-black"></Play>
+            <div className="absolute right-4 ">
+                <PlayButton></PlayButton>
             </div>
         </button>
     )

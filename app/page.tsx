@@ -1,10 +1,14 @@
 import HeaderWrapper from "@/components/header-wrapper";
 import PlaylistItem from "@/components/playlist-item";
+import getSongs from "./server-actions/get-songs";
+import PageContent from "@/components/page-content";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default async function Home() {
+    const songs = await getSongs()
 
     return (
-        <div className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto">
+        <ScrollArea className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto">
             <HeaderWrapper className="bg-gradient-to-b from-emerald-800">
                 <div className="mb-2">
                     <h1 className="text-white text-3xl font-semibold">Welcome Back</h1>
@@ -21,7 +25,10 @@ export default async function Home() {
                         Newest Songs
                     </h1>
                 </div>
+                <div>
+                    <PageContent songs={songs}></PageContent>
+                </div>
             </div>
-        </div>
+        </ScrollArea>
     );
 }
