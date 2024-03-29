@@ -2,6 +2,7 @@
 
 import SpotifyPlaylistIcon from "@/Icons/SpotifyPlaylistIcon"
 import { Plus } from "lucide-react"
+import TooltipWrapper from "../tooltip-wrapper"
 
 
 export default function SidebarLibrary() {
@@ -16,7 +17,9 @@ export default function SidebarLibrary() {
                     <SpotifyPlaylistIcon size={24} className="text-neutral-400 stroke-neutral-400 fill-neutral-400"></SpotifyPlaylistIcon>
                     <p className="text-neutral-400 font-medium text-md">Your Library</p>
                 </div>
-                <Plus onClick={onClick} size={20} className="text-neutral-400 cursor-pointer hover:text-white transition"></Plus>
+                <TooltipWrapper align="center" side="top" label="Create Playlist">
+                    <Plus onClick={onClick} size={20} className="text-neutral-400 cursor-pointer hover:text-white transition"></Plus>
+                </TooltipWrapper>
             </div>
         </div>
     )
