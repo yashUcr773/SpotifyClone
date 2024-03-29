@@ -5,6 +5,7 @@ import React from "react"
 import { Button } from "./ui/button"
 import { ChevronLeft, ChevronRight, Home, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useModal } from "@/hooks/useModal"
 
 interface HeaderWrapperProps {
     children: React.ReactNode,
@@ -12,6 +13,8 @@ interface HeaderWrapperProps {
 }
 
 export default function HeaderWrapper({ children, className }: HeaderWrapperProps) {
+
+    const { openModal } = useModal()
     const router = useRouter()
 
     const handleLogout = async () => {
@@ -46,12 +49,12 @@ export default function HeaderWrapper({ children, className }: HeaderWrapperProp
                 {/* Login-logout */}
                 <div className="flex justify-between items-center gap-x-4">
                     <div>
-                        <Button className="text-neutral-300 text-base font-bold hover:scale-110 hover:text-neutral-200 hover:no-underline" variant={"link"}>
+                        <Button onClick={() => { openModal('signup') }} className="text-neutral-300 text-base font-bold hover:scale-110 hover:text-neutral-200 hover:no-underline" variant={"link"}>
                             Sign up
                         </Button>
                     </div>
                     <div>
-                        <Button className="px-6 py-4 text-base hover:scale-110" variant={'primary'}>
+                        <Button onClick={() => { openModal('signin') }} className="px-6 py-4 text-base hover:scale-110" variant={'primary'}>
                             Log in
                         </Button>
                     </div>
