@@ -16,6 +16,15 @@ interface HeaderWrapperProps {
     className?: string
 }
 
+// TODO: Add some settings for user avatar
+// My songs.
+// Change name, avatar image
+// logout
+// upload songs
+// edit songs?
+// remove songs?
+
+
 export default function HeaderWrapper({ children, className }: HeaderWrapperProps) {
 
     const { openModal } = useModal()
