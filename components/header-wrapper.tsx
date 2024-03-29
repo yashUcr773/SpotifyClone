@@ -1,11 +1,15 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Button } from "./ui/button"
 import { ChevronLeft, ChevronRight, Home, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useModal } from "@/hooks/useModal"
+import { useModal } from "@/hooks/use-modal"
+import { signOut, useSession } from "next-auth/react"
+import useIsAuthenticated from "@/hooks/use-is-authenticated"
+import UserAvatar from "./user-avatar"
+import toast from "react-hot-toast"
 
 interface HeaderWrapperProps {
     children: React.ReactNode,
@@ -17,8 +21,11 @@ export default function HeaderWrapper({ children, className }: HeaderWrapperProp
     const { openModal } = useModal()
     const router = useRouter()
 
+    const { isAuthenticated, session } = useIsAuthenticated()
+
     const handleLogout = async () => {
-        // TODO: ADD LOGOUT
+        signOut()
+        toast.success('Logout successful!')
     }
 
 
@@ -48,16 +55,29 @@ export default function HeaderWrapper({ children, className }: HeaderWrapperProp
 
                 {/* Login-logout */}
                 <div className="flex justify-between items-center gap-x-4">
-                    <div>
-                        <Button onClick={() => { openModal('signup') }} className="text-neutral-300 text-base font-bold hover:scale-110 hover:text-neutral-200 hover:no-underline" variant={"link"}>
-                            Sign up
-                        </Button>
-                    </div>
-                    <div>
-                        <Button onClick={() => { openModal('signin') }} className="px-6 py-4 text-base hover:scale-110" variant={'primary'}>
-                            Log in
-                        </Button>
-                    </div>
+                    {isAuthenticated && (
+                        <>
+                            <Button onClick={handleLogout} className="px-6 py-4 text-base hover:scale-110" variant={'primary'}>
+                                Logout
+                            </Button>
+                            <UserAvatar imageUrl={session?.data?.user?.image!}></UserAvatar>
+                        </>
+                    )}
+                    {!isAuthenticated && (
+                        <>
+                            <div>
+                                <Button onClick={() => { openModal('signup') }} className="text-neutral-300 text-base font-bold hover:scale-110 hover:text-neutral-200 hover:no-underline" variant={"link"}>
+                                    Sign up
+                                </Button>
+                            </div>
+                            <div>
+                                <Button onClick={() => { openModal('signin') }} className="px-6 py-4 text-base hover:scale-110" variant={'primary'}>
+                                    Log in
+                                </Button>
+                            </div>
+                        </>
+
+                    )}
                 </div>
 
             </div>

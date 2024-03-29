@@ -4,12 +4,15 @@ import { useForm } from "react-hook-form"
 import SocialButtons from "./social-buttons"
 import { Button } from "@/components/ui/button"
 import { BsGithub, BsGoogle } from "react-icons/bs"
-import { useModal } from "@/hooks/useModal"
+import { useModal } from "@/hooks/use-modal"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "@/components/ui/form"
 import FormInput from "@/components/form-input"
+import { useState } from "react"
+import { signIn } from "next-auth/react"
+import toast from "react-hot-toast"
 
 
 const formSchema = z.object({
@@ -18,9 +21,9 @@ const formSchema = z.object({
 })
 
 export default function SigninModal() {
-
     const { closeModal, openModal, isOpen, type } = useModal()
     const isModalOpen = isOpen && type === 'signin'
+    const [loading, setLoading] = useState(false)
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -30,13 +33,50 @@ export default function SigninModal() {
         }
     })
 
-    const isLoading = form.formState.isSubmitting;
+    const isLoading = loading || form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values)
+        try {
+            setLoading(true)
+
+            let result = await signIn('credentials', {
+                ...values, redirect: false
+            })
+            if (result?.error) {
+                toast.error('Invalid Credentials!')
+            }
+            if (result?.ok && !result?.error) {
+                toast.success('Log in Successful!')
+                form.reset()
+                closeModal()
+            }
+        } catch (e) {
+            toast.error('Something went wrong!')
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     const socialAction = async (action: AUTH_MODAL_SOCIALS) => {
+        try {
+            setLoading(true)
+            const result = await signIn(action, { redirect: false })
+            console.log(result)
+            if (result?.error) {
+                toast.error('Invalid Credentials!')
+            }
+            if (result?.ok && !result?.error) {
+                toast.success('Log in Successful!')
+                form.reset()
+                closeModal()
+            }
+        } catch (e) {
+            toast.error('Something went wrong!')
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     const onFormToggle = () => {
@@ -62,8 +102,8 @@ export default function SigninModal() {
                 </DialogHeader>
                 <div className="px-6 mt-4">
                     <div className="flex gap-4">
-                        <SocialButtons icon={<BsGithub></BsGithub>} onClick={() => socialAction('github')}></SocialButtons>
-                        <SocialButtons icon={<BsGoogle></BsGoogle>} onClick={() => socialAction('google')}></SocialButtons>
+                        <SocialButtons isLoading={isLoading} icon={<BsGithub></BsGithub>} onClick={() => socialAction('github')}></SocialButtons>
+                        <SocialButtons isLoading={isLoading} icon={<BsGoogle></BsGoogle>} onClick={() => socialAction('google')}></SocialButtons>
                     </div>
 
                     <div className="relative my-8">

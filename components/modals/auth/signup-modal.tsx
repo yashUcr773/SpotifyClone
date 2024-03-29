@@ -4,13 +4,16 @@ import { useForm } from "react-hook-form"
 import SocialButtons from "./social-buttons"
 import { Button } from "@/components/ui/button"
 import { BsGithub, BsGoogle } from "react-icons/bs"
-import { useModal } from "@/hooks/useModal"
+import { useModal } from "@/hooks/use-modal"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "@/components/ui/form"
 import FormInput from "@/components/form-input"
-
+import toast from "react-hot-toast"
+import axios from 'axios'
+import { signIn } from 'next-auth/react'
+import { useState } from "react"
 
 const formSchema = z.object({
     firstname: z.string().min(1, { message: 'Firstname is required' }),
@@ -27,6 +30,7 @@ export default function SignupModal() {
 
     const { closeModal, openModal, isOpen, type } = useModal()
     const isModalOpen = isOpen && type === 'signup'
+    const [loading, setLoading] = useState(false)
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -39,17 +43,45 @@ export default function SignupModal() {
         }
     })
 
-    const isLoading = form.formState.isSubmitting;
+    const isLoading = loading || form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values)
+        try {
+            setLoading(true);
+            await axios.post('/api/register', values);
+            toast.success('Sign up successful!');
+            form.reset()
+            closeModal()
+        } catch (e) {
+            toast.error('Something went wrong!');
+        } finally {
+            setLoading(false);
+        }
     }
 
     const onFormToggle = () => {
         closeModal()
         openModal('signin')
     }
+
     const socialAction = async (action: AUTH_MODAL_SOCIALS) => {
+        try {
+            setLoading(true)
+            const result = await signIn(action, { redirect: false })
+            if (result?.error) {
+                toast.error('Invalid Credentials!')
+            }
+            if (result?.ok && !result?.error) {
+                toast.success('Log in Successful!')
+                form.reset()
+                closeModal()
+            }
+        } catch (e) {
+            toast.error('Something went wrong!')
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     const handleModalClose = () => {
@@ -70,8 +102,8 @@ export default function SignupModal() {
                 </DialogHeader>
                 <div className="px-6 mt-4">
                     <div className="flex gap-4">
-                        <SocialButtons icon={<BsGithub></BsGithub>} onClick={() => socialAction('github')}></SocialButtons>
-                        <SocialButtons icon={<BsGoogle></BsGoogle>} onClick={() => socialAction('google')}></SocialButtons>
+                        <SocialButtons isLoading={isLoading} icon={<BsGithub></BsGithub>} onClick={() => socialAction('github')}></SocialButtons>
+                        <SocialButtons isLoading={isLoading} icon={<BsGoogle></BsGoogle>} onClick={() => socialAction('google')}></SocialButtons>
                     </div>
 
                     <div className="relative my-8">
