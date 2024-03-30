@@ -20,7 +20,7 @@ export default function PlaylistItem({ image, name }: PlaylistItemProps) {
 
 
     return (
-        <button onClick={onClick} className="relative group flex items-center rounded-md overflow-hidden gap-x-4 bg-neutral-100/10 hover:bg-neutral-100/20 transition pr-4">
+        <div onClick={onClick} className="relative group flex items-center rounded-md overflow-hidden gap-x-4 bg-neutral-100/10 hover:bg-neutral-100/20 transition pr-4">
             <div className="relative min-h-[64px] min-w-[64px]">
                 {/* TODO: ADD hook to use liked image for liked playlist and create own covers using songs */}
                 <Image className="object-cover" fill src={image} alt="Image"></Image>
@@ -29,6 +29,6 @@ export default function PlaylistItem({ image, name }: PlaylistItemProps) {
             <div className="absolute right-4 ">
                 <PlayButton></PlayButton>
             </div>
-        </button>
+        </div>
     )
 }
