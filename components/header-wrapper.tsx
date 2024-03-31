@@ -3,10 +3,10 @@
 import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from "react"
 import { Button } from "./ui/button"
-import { ChevronLeft, ChevronRight, Home, Search } from "lucide-react"
+import { ChevronLeft, ChevronRight, Home, Search, Upload } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useModal } from "@/hooks/use-modal"
-import { signOut, useSession } from "next-auth/react"
+import { signOut } from "next-auth/react"
 import useIsAuthenticated from "@/hooks/use-is-authenticated"
 import UserAvatar from "./user-avatar"
 import toast from "react-hot-toast"
@@ -54,11 +54,14 @@ export default function HeaderWrapper({ children, className }: HeaderWrapperProp
 
                 {/* Navigation icons in mobile view */}
                 <div className="flex md:hidden gap-x-2 items-center">
-                    <button className="rounded-full p-2 bg-white flex items-center hover:opacity-75 transition">
+                    <button onClick={() => { router.push('/') }} className="rounded-full p-2 bg-white flex items-center hover:opacity-75 transition">
                         <Home className="text-black" size={20}></Home>
                     </button>
-                    <button className="rounded-full p-2 bg-white flex items-center hover:opacity-75 transition">
+                    <button onClick={() => { router.push('/search') }} className="rounded-full p-2 bg-white flex items-center hover:opacity-75 transition">
                         <Search className="text-black" size={20}></Search>
+                    </button>
+                    <button onClick={() => { router.push('/upload') }} className="rounded-full p-2 bg-white flex items-center hover:opacity-75 transition">
+                        <Upload className="text-black" size={20}></Upload>
                     </button>
                 </div>
 

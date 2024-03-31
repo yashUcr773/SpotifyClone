@@ -1,6 +1,6 @@
 "use client"
 
-import { Song } from "@/types"
+import { Song } from "@prisma/client"
 import SongItem from "./song-item"
 
 interface PageContentProps {

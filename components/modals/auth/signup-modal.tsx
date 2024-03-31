@@ -9,12 +9,13 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "@/components/ui/form"
-import FormInput from "@/components/form-input"
+import FormInput from "@/components/form/form-input"
 import toast from "react-hot-toast"
 import axios from 'axios'
 import { signIn } from 'next-auth/react'
 import { useState } from "react"
 import { AUTH_MODAL_SOCIALS } from "@/types"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     firstname: z.string().min(1, { message: 'Firstname is required' }),
@@ -32,6 +33,7 @@ export default function SignupModal() {
     const { closeModal, openModal, isOpen, type } = useModal()
     const isModalOpen = isOpen && type === 'signup'
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -53,6 +55,19 @@ export default function SignupModal() {
             toast.success('Sign up successful!');
             form.reset()
             closeModal()
+
+            let result = await signIn('credentials', {
+                ...values, redirect: false
+            })
+            if (result?.error) {
+                toast.error('Invalid Credentials!')
+            }
+            if (result?.ok && !result?.error) {
+                toast.success('Log in Successful!')
+            }
+
+            router.refresh()
+
         } catch (e) {
             toast.error('Something went wrong!');
         } finally {

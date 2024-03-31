@@ -7,7 +7,7 @@ import { UploadDropzone } from "@/lib/uploadthing"
 // import "@uploadthing/react/styles.css"
 
 interface FileUploaderProps {
-    endpoint: 'coverImages' | 'audioFiles'
+    endpoint: "coverImages" | "audioFiles" | "playlistImages"
     value: string
     onChange: (url?: string) => void
 }
@@ -48,7 +48,7 @@ export default function FileUploader({ endpoint, onChange, value }: FileUploader
         }} onUploadError={(error: Error) => {
             console.log(error)
         }} appearance={{
-            container: { padding: '4px', paddingTop: '36px' }, label: { color: 'white', fontWeight: '400' }, allowedContent: { color: 'white' }
+            container: { padding: '4px', paddingTop: '36px', outline:'none' }, label: { color: 'white', fontWeight: '400' }, allowedContent: { color: 'white' }
         }}>
 
         </UploadDropzone>

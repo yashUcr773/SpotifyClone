@@ -6,8 +6,13 @@ import { Home, Search, Upload } from "lucide-react";
 import SidebarLibrary from "./sidebar-library";
 import SidebarNavigation from "./sidebar-navigation";
 import BoxWrapper from "../box-wrapper";
+import { PlaylistWithSongsAndUsers } from "@/types";
 
-export default function Sidebar() {
+interface SidebarProps {
+    playlists: PlaylistWithSongsAndUsers[]
+}
+
+export default function Sidebar({ playlists }: SidebarProps) {
 
     const pathname = usePathname();
     const routes = useMemo(() => [
@@ -38,8 +43,8 @@ export default function Sidebar() {
                     {routes.map((route) => <SidebarNavigation key={route.label} {...route}></SidebarNavigation>)}
                 </nav>
             </BoxWrapper>
-            <BoxWrapper className="overflow-y-auto h-full">
-                <SidebarLibrary />
+            <BoxWrapper className="flex overflow-hidden h-full w-full">
+                <SidebarLibrary playlists={playlists} />
             </BoxWrapper>
         </aside>
     )

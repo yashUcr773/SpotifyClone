@@ -20,6 +20,15 @@ export const ourFileRouter = {
         .onUploadComplete(async ({ metadata }) => {
             return { uploadedBy: metadata.user };
         }),
+    playlistImages: f({ image: { maxFileSize: "1MB" } })
+        .middleware(async ({ req }) => {
+            const user = await auth(req);
+            if (!user) throw new UploadThingError("Unauthorized");
+            return { user };
+        })
+        .onUploadComplete(async ({ metadata }) => {
+            return { uploadedBy: metadata.user };
+        }),
 
     audioFiles: f({ audio: { maxFileSize: "32MB" } })
         .middleware(async ({ req }) => {

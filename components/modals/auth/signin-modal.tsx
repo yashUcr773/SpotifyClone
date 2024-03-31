@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "@/components/ui/form"
-import FormInput from "@/components/form-input"
+import FormInput from "@/components/form/form-input"
 import { useState } from "react"
 import { signIn } from "next-auth/react"
 import toast from "react-hot-toast"
@@ -63,7 +63,6 @@ export default function SigninModal() {
         try {
             setLoading(true)
             const result = await signIn(action, { redirect: false })
-            console.log(result)
             if (result?.error) {
                 toast.error('Invalid Credentials!')
             }

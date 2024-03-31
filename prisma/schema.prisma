@@ -43,7 +43,10 @@ model User {
     updatedAt           DateTime        @updatedAt
 
     accounts            Account[]
+    
     uploadedSongs       Song[]
+
+    playlists           Playlist[]
 }
 
 model Song {
@@ -56,4 +59,20 @@ model Song {
 
     uploaderId          String
     uploader            User            @relation(fields: [uploaderId], references: [id], onDelete:Cascade)
+
+    playlist            Playlist[]
+}
+
+model Playlist {
+    id                  String          @id @default(cuid())
+    name                String
+    createdAt           DateTime        @default(now())
+    updatedAt           DateTime        @updatedAt
+    description         String          @default("")
+    image_path          String          @default("")
+
+    userId              String
+    user                User            @relation(fields: [userId], references: [id], onDelete:Cascade)
+
+    songs               Song[]
 }

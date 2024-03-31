@@ -1,5 +1,5 @@
 "use client"
-import { Song } from "@/types";
+import { Song } from "@prisma/client";
 import Image from "next/image";
 
 interface MediaItemProps {
@@ -9,7 +9,7 @@ interface MediaItemProps {
 export default function MediaItem({ data }: MediaItemProps) {
 
     return (
-        <div className="flex items-center gap-x-3 cursor-pointer hover:bg-neutral-800/50 w-full p-2 rounded-md">
+        <div className="flex items-center gap-x-3 cursor-pointer w-full p-2 rounded-md">
             <div className="relative rounded-md min-h-[48px] min-w-[48px] overflow-hidden">
                 <Image src={data.image_path || ""} fill alt={data.title} className="object-cover" />
             </div>

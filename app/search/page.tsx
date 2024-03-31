@@ -9,20 +9,21 @@ interface SearchPageProps {
     }
 }
 
-export const revalidate = 0;
-
+// TODO: Add infinite loader with tanstack query
 export default async function SearchPage({ searchParams }: SearchPageProps) {
     const songs = await getSongsByTitle(searchParams.title)
 
     return (
         <div className="bg-neutral-900 rounded-lg w-full h-full overflow-hidden overflow-y-auto">
-            <HeaderWrapper className="from-bg-neutral-900">
+            <HeaderWrapper className="bg-gradient-to-b from-cyan-800 pb-0">
                 <div className="mb-2 flex flex-col gap-y-6">
                     <h1 className="text-white text-3xl font-semibold">Search</h1>
-                    <SearchInput></SearchInput>
+                    <SearchInput apiUrl="/search" placeholder="What do you want to listen to?"></SearchInput>
                 </div>
             </HeaderWrapper>
-            <SearchContent songs={songs}></SearchContent>
+            <div className="w-11/12 mx-auto">
+                <SearchContent songs={songs}></SearchContent>
+            </div>
         </div>
     )
 }

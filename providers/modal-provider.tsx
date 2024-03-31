@@ -2,6 +2,7 @@
 
 import SigninModal from "@/components/modals/auth/signin-modal"
 import SignupModal from "@/components/modals/auth/signup-modal"
+import EditPlaylistModal from "@/components/modals/edit-playlist-modal"
 import { useEffect, useState } from "react"
 
 export default function ModalProvider() {
@@ -17,6 +18,7 @@ export default function ModalProvider() {
 
     return (
         <>
+            <EditPlaylistModal />
             <SigninModal />
             <SignupModal />
         </>

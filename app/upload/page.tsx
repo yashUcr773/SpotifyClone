@@ -1,5 +1,5 @@
 "use client"
-import FormInput from "@/components/form-input";
+import FormInput from "@/components/form/form-input";
 import HeaderWrapper from "@/components/header-wrapper";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -12,6 +12,7 @@ import * as z from 'zod';
 import FileUploader from "@/components/file-uploader";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utils";
+import FormFileUploader from "@/components/form/form-file-uploader";
 
 const formSchema = z.object({
     image_path: z.string().min(1, { message: 'Cover is required.' }),
@@ -67,27 +68,10 @@ export default function UploadPage() {
                                 <FormInput form={form} isLoading={isLoading} label='Song Name' name="title" placehoder="Song name"></FormInput>
                                 <FormInput form={form} isLoading={isLoading} label='Author' name="author" placehoder="Song Author"></FormInput>
                                 <div className="flex flex-col gap-2 xl:flex-row mt-32">
-                                    <FormField control={form.control} name="image_path" render={({ field }) => (
-                                        <FormItem className="flex flex-col items-center justify-center flex-1 bg-gray-700 rounded-lg cursor-pointer p-2">
-                                            <FormLabel className={cn("capitalize test-xs font-medium text-zinc-50 mb-2", !field.value && '-mb-10')}>cover image</FormLabel>
-                                            <FormControl>
-                                                <FileUploader endpoint="coverImages" value={field.value} onChange={field.onChange}></FileUploader>
-                                            </FormControl>
-                                            <FormMessage></FormMessage>
 
-                                        </FormItem>
-                                    )}></FormField>
+                                    <FormFileUploader endpoint="coverImages" form={form} label="Cover image" name="image_path" ></FormFileUploader>
+                                    <FormFileUploader endpoint="audioFiles" form={form} label="Song file" name="song_path" ></FormFileUploader>
 
-                                    <FormField control={form.control} name="song_path" render={({ field }) => (
-                                        <FormItem className="flex flex-col items-center justify-center flex-1 bg-gray-700 rounded-lg cursor-pointer p-2">
-                                            <FormLabel className={cn("capitalize test-xs font-medium text-zinc-50  mb-2", !field.value && '-mb-10')}>song file</FormLabel>
-                                            <FormControl>
-                                                <FileUploader endpoint="audioFiles" value={field.value} onChange={field.onChange}></FileUploader>
-                                            </FormControl>
-                                            <FormMessage></FormMessage>
-
-                                        </FormItem>
-                                    )}></FormField>
                                 </div>
 
                             </div>
