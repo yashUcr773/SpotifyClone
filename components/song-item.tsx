@@ -1,8 +1,8 @@
 "use client"
 
-import { Song } from "@/types"
 import Image from "next/image"
 import PlayButton from "./play-button"
+import { Song } from "@prisma/client"
 
 interface SongItemProps {
     data: Song

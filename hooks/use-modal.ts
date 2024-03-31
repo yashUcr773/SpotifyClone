@@ -1,7 +1,7 @@
 import { Playlist } from '@prisma/client';
 import { create } from 'zustand';
 
-export type ModalType = 'signup' | 'signin' | 'editPlaylist';
+export type ModalType = 'signup' | 'signin' | 'editPlaylist' | 'deletePlaylist';
 
 interface ModalData {
     playlist?: Playlist

@@ -32,7 +32,7 @@ export default function SearchInput({ apiUrl, placeholder, className }: SearchIn
     }, [debouncedValue, router])
 
     return (
-        <div onClick={() => { inputRef?.current?.focus() }} className={cn("flex-row gap-x-1 items-center justify-center bg-neutral-700 text-white flex w-full rounded-md border border-transparent", className)}>
+        <div className={cn("flex-row gap-x-1 items-center justify-center bg-neutral-700 text-white flex w-full rounded-md border border-transparent", className)}>
             <Search className="bg-transparent m-2 cursor-pointer" size={24}></Search>
             <input
                 ref={inputRef}

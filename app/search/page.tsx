@@ -1,7 +1,8 @@
 import HeaderWrapper from "@/components/header-wrapper";
 import getSongsByTitle from "../server-actions/get-song-by-title";
 import SearchInput from "@/components/search/search-input";
-import SearchContent from "@/components/search/search-content";
+import SongList from "@/components/song-list";
+import getUserPlaylists from "../server-actions/get-user-playlists";
 
 interface SearchPageProps {
     searchParams: {
@@ -12,6 +13,8 @@ interface SearchPageProps {
 // TODO: Add infinite loader with tanstack query
 export default async function SearchPage({ searchParams }: SearchPageProps) {
     const songs = await getSongsByTitle(searchParams.title)
+    const playlists = await getUserPlaylists()
+
 
     return (
         <div className="bg-neutral-900 rounded-lg w-full h-full overflow-hidden overflow-y-auto">
@@ -22,7 +25,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 </div>
             </HeaderWrapper>
             <div className="w-11/12 mx-auto">
-                <SearchContent songs={songs}></SearchContent>
+                <SongList songs={songs} playlists={playlists!} className="h-full px-6 py-4"></SongList>
             </div>
         </div>
     )
