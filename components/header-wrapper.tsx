@@ -7,9 +7,9 @@ import { ChevronLeft, ChevronRight, Home, Search, Upload } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useModal } from "@/hooks/use-modal"
 import { signOut } from "next-auth/react"
-import useIsAuthenticated from "@/hooks/use-is-authenticated"
 import UserAvatar from "./user-avatar"
 import toast from "react-hot-toast"
+import useIsAuthenticated from "@/hooks/use-is-authenticated"
 
 interface HeaderWrapperProps {
     children: React.ReactNode,

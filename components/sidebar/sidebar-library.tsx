@@ -6,12 +6,12 @@ import TooltipWrapper from "../tooltip-wrapper"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import { useModal } from "@/hooks/use-modal"
-import useIsAuthenticated from "@/hooks/use-is-authenticated"
 import { useState } from "react"
 import toast from "react-hot-toast"
 import SidebarLibraryPlaylistItem from "./sidebar-library-playlist-item"
 import { ScrollArea } from "../ui/scroll-area"
 import { PlaylistWithSongsAndUsers } from "@/types"
+import useIsAuthenticated from "@/hooks/use-is-authenticated"
 interface SidebarLibraryProps {
     playlists: PlaylistWithSongsAndUsers[]
 }
