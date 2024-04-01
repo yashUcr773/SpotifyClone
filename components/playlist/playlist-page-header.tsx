@@ -5,6 +5,8 @@ import PlaylistCover from "../playlist-cover"
 import TooltipWrapper from "../tooltip-wrapper"
 import { Edit, Trash } from "lucide-react"
 import { useModal } from "@/hooks/use-modal"
+import PlayButton from "../play-button"
+import useAudioPlayer from "@/hooks/use-audio-player"
 
 interface PlaylistPageHeaderProps {
     playlist: PlaylistWithSongsAndUsers
@@ -13,6 +15,13 @@ interface PlaylistPageHeaderProps {
 export default function PlaylistPageHeader({ playlist }: PlaylistPageHeaderProps) {
 
     const { openModal } = useModal()
+    const player = useAudioPlayer()
+
+    const playSongs = () => {
+        player.setAllSongs(playlist.songs)
+        player.setActiveSong(playlist.songs[0])
+    }
+
 
     return (
         <div className="min-h-[144px] relative  px-4 py-2 mb-2 flex flex-row gap-x-4 mt-16 group  cursor-pointer max-w-2xl" >
@@ -31,6 +40,7 @@ export default function PlaylistPageHeader({ playlist }: PlaylistPageHeaderProps
                     <Trash size={24} onClick={() => { openModal('deletePlaylist', { playlist }) }} className="cursor-pointer ml-auto  text-white transition"></Trash>
                 </TooltipWrapper>
             </div>
+            <PlayButton className="opacity-75 absolute bottom-0 right-0" onClick={playSongs}></PlayButton>
         </div>
     )
 }

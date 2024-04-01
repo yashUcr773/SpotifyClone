@@ -38,7 +38,7 @@ export default async function RootLayout({
                         </main>
                     </div>
                     <div>
-                        <Player></Player>
+                        <Player playlists={playlists!}></Player>
                     </div>
                 </NextAuthProvider>
             </body>

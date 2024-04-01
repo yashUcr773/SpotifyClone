@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { Song } from "@/types";
+import { Song } from "@prisma/client";
 
 export default async function getSongs(): Promise<Song[]> {
     try {
