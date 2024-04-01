@@ -11,6 +11,8 @@ import { useRouter } from "next/navigation"
 import { useState } from "react"
 import toast from "react-hot-toast"
 import TooltipWrapper from "./tooltip-wrapper"
+import useAudioPlayer from "@/hooks/use-audio-player"
+import AnimateSoundWaves from "./animate-sound-waves"
 
 interface SongListProps {
     songs: Song[]
@@ -25,6 +27,7 @@ interface SongListProps {
 export default function SongList({ songs, playlists, className, playlist, forceShow = false, showAddButton = false, showRemoveButton = false }: SongListProps) {
 
     const router = useRouter()
+    const player = useAudioPlayer()
     const [isLoading, setIsLoading] = useState(false)
 
     if (songs.length === 0) {
@@ -69,6 +72,7 @@ export default function SongList({ songs, playlists, className, playlist, forceS
                 (
                     <div key={song.id} className="flex items-center gap-x-4 w-full">
                         <div className="flex flex-1 flex-row items-center justify-between hover:bg-neutral-700/90 rounded-lg">
+                            <AnimateSoundWaves animate={song.id === player.activeSong?.id}></AnimateSoundWaves>
                             <MediaItem data={song}></MediaItem>
                             <AddToPlaylistDropdown playlists={playlists} song={song}></AddToPlaylistDropdown>
                             {showAddButton && (

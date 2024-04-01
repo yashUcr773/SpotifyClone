@@ -24,7 +24,7 @@ export default function PlaylistPageHeader({ playlist }: PlaylistPageHeaderProps
 
 
     return (
-        <div className="min-h-[144px] relative  px-4 py-2 mb-2 flex flex-row gap-x-4 mt-16 group  cursor-pointer max-w-2xl" >
+        <div className="min-h-[144px] relative  px-4 py-2 mb-2 flex flex-row gap-x-4 mt-16 group  cursor-pointer" >
             <PlaylistCover playlist={playlist} iconSize={64} coverSize={36}></PlaylistCover>
             <div onClick={() => { openModal('editPlaylist', { playlist }) }} className="flex flex-col gap-y-4 justify-end">
                 <span className="text-white text-sm">Playlist</span>
