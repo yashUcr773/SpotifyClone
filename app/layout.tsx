@@ -3,7 +3,7 @@ import "./globals.css";
 import localFont from 'next/font/local'
 import { cn } from "@/lib/utils";
 import Player from "@/components/player/player";
-import Sidebar from "@/components/sidebar/sidebar";
+import Sidebar from "@/components/sidebar/side";
 import ModalProvider from "@/providers/modal-provider";
 import ToasterProvider from "@/providers/toaster-provider";
 import NextAuthProvider from "@/providers/next-auth-provider";
