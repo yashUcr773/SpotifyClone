@@ -28,7 +28,7 @@ export default async function PlaylistIdPage({ searchParams, params }: PlaylistI
     }
 
     return (
-        <ScrollArea className="bg-neutral-900 rounded-lg w-full h-full overflow-hidden overflow-y-auto">
+        <ScrollArea className="bg-neutral-900 rounded-lg w-full h-full overflow-auto">
             <HeaderWrapper className="bg-gradient-to-b from-violet-700 ">
                 <PlaylistPageHeader playlist={playlist}></PlaylistPageHeader>
             </HeaderWrapper>

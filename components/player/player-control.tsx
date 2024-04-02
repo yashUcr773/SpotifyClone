@@ -81,15 +81,22 @@ export default function PlayerControl({ volume }: PlayerControlProps) {
             setIsPlaying(false)
         }
     }
-
+    const formatTime = (seconds: number) => {
+        let minutes = Math.round(Math.floor(seconds / 60))
+        let remainingSeconds = Math.round(seconds % 60);
+        // Add leading zero if necessary
+        let nminutes = minutes < 10 ? '0' + minutes : minutes;
+        let nremainingSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
+        return nminutes + ':' + nremainingSeconds;
+      }
 
 
     return (
-        <div className="h-full flex p-2 flex-col items-center w-full gap-y-3  shrink-0 max-w-[240px] md:max-w-[360px] lg:max-w-[480px]">
+        <div className="h-full flex p-2 flex-col items-center w-full gap-y-1  shrink-0 max-w-[240px] md:max-w-[360px] lg:max-w-[480px]">
             <div className="flex flex-row gap-2 items-center justify-center">
-                <Shuffle size={20} onClick={() => { setShuffle(v => !v) }} className={cn('text-white cursor-pointer', shuffle && 'text-green-700')}></Shuffle>
+                <Shuffle size={20} onClick={() => { setShuffle(v => !v) }} className={cn('text-white cursor-pointer', shuffle && 'text-green-500')}></Shuffle>
                 <SkipBack size={20} onClick={playPrev} className="cursor-pointer"></SkipBack>
-                <div className="p-3 rounded-full bg-green-700 cursor-pointer">
+                <div className="p-3 rounded-full bg-green-500 cursor-pointer">
                     {!isPlaying && (<Play size={20} className="text-black fill-black cursor-pointer" onClick={playSong}></Play>)}
                     {isPlaying && (<Pause size={20} className="text-black fill-black cursor-pointer" onClick={pauseSong}></Pause>)}
                 </div>
@@ -102,11 +109,19 @@ export default function PlayerControl({ volume }: PlayerControlProps) {
                     onTimeUpdate={handlePlayerTimeUpdate}
                     onEnded={() => playNext()}
                 />
-                <PlayerSeekbarControl
-                    value={currentTime}
-                    seekbarChangeHandler={seekbarChangeHandler}
-                    className=""
-                ></PlayerSeekbarControl>
+                <div className="flex flex-row gap-x-2 items-center justify-center">
+                    <span className="w-14">
+                        {formatTime(audioRef.current?.currentTime!)}
+                    </span>
+                    <PlayerSeekbarControl
+                        value={currentTime}
+                        seekbarChangeHandler={seekbarChangeHandler}
+                        className=""
+                    ></PlayerSeekbarControl>
+                    <span className="w-14">
+                        {formatTime(audioRef.current?.duration!)}
+                    </span>
+                </div>
             </div>
 
         </div>

@@ -42,10 +42,10 @@ export default function AddToPlaylistDropdown({ song, playlists }: AddToPlaylist
                     {
                         playlists.some(playlist => playlist.songs.some(s => s.id === song.id)) ?
                             (
-                                <button className="p-4 text-green-500 fill-green-500"><CircleCheck></CircleCheck></button>
+                                <button className="p-2 md:p-4 text-green-500 fill-green-500"><CircleCheck></CircleCheck></button>
                             ) :
                             (
-                                <button className="p-4 text-white"><PlusCircle></PlusCircle></button>
+                                <button className="p-2 md:p-4 text-white"><PlusCircle></PlusCircle></button>
                             )
                     }
 

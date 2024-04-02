@@ -17,7 +17,7 @@ export default function PageContent({ songs }: PageContentProps) {
 
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-8 gap-2 mt-4">
-            {songs.map((song: Song) => <SongItem key={song.id} data={song}></SongItem>)}
+            {songs.map((song: Song) => <SongItem key={song.id} song={song} songs={songs}></SongItem>)}
         </div>
     )
 }

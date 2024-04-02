@@ -37,9 +37,9 @@ export default function Sidebar({ playlists }: SidebarProps) {
     ], [pathname])
 
     return (
-        <aside className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[320px] p-2">
+        <aside className="flex flex-col gap-y-2 bg-black h-full w-[80px] md:w-[280px] p-2">
             <BoxWrapper>
-                <nav className="flex flex-col gap-y-4 px-6 py-4">
+                <nav className="flex flex-col gap-y-4 px-2 md:px-6 py-4">
                     {routes.map((route) => <SidebarNavigation key={route.label} {...route}></SidebarNavigation>)}
                 </nav>
             </BoxWrapper>

@@ -4,6 +4,7 @@ import SongList from "../song-list";
 import SearchInput from "../search/search-input";
 import { PlaylistWithSongsAndUsers } from "@/types";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 interface PlaylistPageBody {
     params: {
@@ -19,14 +20,14 @@ export default function PlaylistPageBody({ params, songs, playlist, playlists }:
     const [showSearch, setShowSearch] = useState(false)
 
     useEffect(() => {
-        if (playlist.songs.length === 0) {
+        if (playlist.songs.length <= 2) {
             setShowSearch(true)
         }
     }, [])
 
     return (
         <div className="w-11/12 text-white flex flex-col gap-y-4 p-4 mx-auto" >
-            <SongList forceShow songs={playlist.songs} playlists={playlists!} playlist={playlist} className="h-fit max-h-80 bg-transparent" showRemoveButton></SongList>
+            <SongList forceShow songs={playlist.songs} playlists={playlists!} playlist={playlist} className={cn("h-fit bg-transparent", showSearch && "max-h-80")} showRemoveButton></SongList>
 
             {showSearch && (
                 <>

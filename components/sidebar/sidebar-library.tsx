@@ -25,6 +25,10 @@ export default function SidebarLibrary({ playlists }: SidebarLibraryProps) {
 
     const onClick = async () => {
 
+        if (creatingPlaylist) {
+            return
+        }
+
         if (!isAuthenticated) {
             return openModal('signin')
         }
@@ -44,16 +48,16 @@ export default function SidebarLibrary({ playlists }: SidebarLibraryProps) {
 
     return (
         <div className="flex flex-col overflow-hidden h-full w-full">
-            <div className="flex items-center justify-between px-6 pt-4">
+            <div onClick={onClick} className="flex items-center justify-between px-6 pt-4">
                 <div className="inline-flex items-center gap-x-2">
                     <SpotifyPlaylistIcon size={24} className="text-neutral-400 stroke-neutral-400 fill-neutral-400"></SpotifyPlaylistIcon>
-                    <p className="text-neutral-400 font-medium text-md">Your Library</p>
+                    <p className="text-neutral-400 font-medium text-md hidden md:block">Your Library</p>
                 </div>
                 <TooltipWrapper align="center" side="top" label="Create Playlist">
                     {creatingPlaylist ? (
-                        <Loader onClick={onClick} size={20} className="text-neutral-400 cursor-pointer hover:text-white transition animate-spin"></Loader>
+                        <Loader size={20} className="text-neutral-400 cursor-pointer hover:text-white transition animate-spin"></Loader>
                     ) : (
-                        <Plus onClick={onClick} size={20} className="text-neutral-400 cursor-pointer hover:text-white transition"></Plus>
+                        <Plus size={20} className="text-neutral-400 cursor-pointer hover:text-white transition"></Plus>
                     )}
                 </TooltipWrapper>
             </div>

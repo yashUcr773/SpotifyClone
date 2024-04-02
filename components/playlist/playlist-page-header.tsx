@@ -20,6 +20,7 @@ export default function PlaylistPageHeader({ playlist }: PlaylistPageHeaderProps
     const playSongs = () => {
         player.setAllSongs(playlist.songs)
         player.setActiveSong(playlist.songs[0])
+        player.setActivePlaylist(playlist!)
     }
 
 

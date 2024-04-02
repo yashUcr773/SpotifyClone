@@ -1,19 +1,32 @@
+import { Song } from "@prisma/client";
+import PlayButton from "./play-button";
+
 interface AnimateSoundWavesProps {
     animate: boolean
+    onClick: (song: Song) => void
+    song: Song
 }
-export default function AnimateSoundWaves({ animate }: AnimateSoundWavesProps) {
+export default function AnimateSoundWaves({ song, animate, onClick }: AnimateSoundWavesProps) {
 
     if (!animate) {
-        return <div className="h-16 w-16 mx-2"></div>
+        return (
+            <div className="w-12 h-12 shrink-0 flex flex-row items-center justify-center ">
+                <div className='flex flex-row'>
+                    <PlayButton onClick={() => { onClick(song) }} className="p-3"></PlayButton>
+                </div>
+            </div>
+        )
     }
 
     const bars = Array.from({ length: 5 }, (_, index) => index);
 
     return (
-        <div className='flex flex-row gap-[2px] h-8 w-16 rotate-180 mx-2'>
-            {bars.map(bar => (
-                <div className={'bar w-[4px] h-1 bottom-0 bg-green-700'}></div>
-            ))}
+        <div className="w-12 h-12 shrink-0 flex flex-row items-center justify-center ">
+            <div className='flex flex-row gap-[2px] rotate-180 h-full'>
+                {bars.map(bar => (
+                    <div className={'bar w-[4px] h-1 bottom-0 bg-green-700'}></div>
+                ))}
+            </div>
         </div>
     )
 

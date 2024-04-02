@@ -64,15 +64,21 @@ export default function SongList({ songs, playlists, className, playlist, forceS
         }
     }
 
+    const playSongs = (song: Song) => {
+        player.setAllSongs(playlist?.songs!)
+        player.setActiveSong(song!)
+        player.setActivePlaylist(playlist!)
+    }
+
     return (
         <ScrollArea
-            className={cn("flex flex-col gap-y-2 w-full bg-neutral-800/50 rounded-lg overflow-auto", className)}>
+            className={cn("flex flex-col gap-y-2 min-w-xl w-full bg-neutral-800/50 rounded-lg overflow-auto ", className)}>
             {songs.map((song: Song) => (
                 (!playlist?.songs.some((playSong: Song) => song.id === playSong.id) || forceShow) &&
                 (
                     <div key={song.id} className="flex items-center gap-x-4 w-full">
-                        <div className="flex flex-1 flex-row items-center justify-between hover:bg-neutral-700/90 rounded-lg">
-                            <AnimateSoundWaves animate={song.id === player.activeSong?.id}></AnimateSoundWaves>
+                        <div className="group flex w-full flex-row items-center justify-between hover:bg-neutral-700/90 rounded-lg p-2 pr-4">
+                            <AnimateSoundWaves song={song} onClick={playSongs} animate={song.id === player.activeSong?.id}></AnimateSoundWaves>
                             <MediaItem data={song}></MediaItem>
                             <AddToPlaylistDropdown playlists={playlists} song={song}></AddToPlaylistDropdown>
                             {showAddButton && (

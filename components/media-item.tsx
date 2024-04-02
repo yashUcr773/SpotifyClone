@@ -1,6 +1,7 @@
 "use client"
 import { Song } from "@prisma/client";
 import Image from "next/image";
+import TooltipWrapper from "./tooltip-wrapper";
 
 interface MediaItemProps {
     data: Song
@@ -14,7 +15,9 @@ export default function MediaItem({ data }: MediaItemProps) {
                 <Image src={data.image_path || ""} fill alt={data.title} className="object-cover" />
             </div>
             <div className="flex flex-col gap-y-1 overflow-hidden">
-                <p className="text-white truncate">{data.title}</p>
+                <TooltipWrapper label={data.title}>
+                    <p className="text-white truncate">{data.title}</p>
+                </TooltipWrapper>
                 <p className="text-neutral-400 text-sm truncate">{data.author}</p>
             </div>
         </div>

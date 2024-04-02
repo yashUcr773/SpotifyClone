@@ -43,25 +43,12 @@ export default function HeaderWrapper({ children, className }: HeaderWrapperProp
             <div className="w-full mb-4 flex items-center justify-between">
 
                 {/* Navigation icons visible in desktop view */}
-                <div className="hidden md:flex gap-x-2 items-center">
+                <div className="flex gap-x-2 items-center">
                     <button onClick={() => router.back()} className="p-0.5 rounded-full bg-black flex items-center justify-center hover:opacity-75 transition">
                         <ChevronLeft size={28} className="stroke-white"></ChevronLeft>
                     </button>
                     <button onClick={() => router.forward()} className="p-0.5 rounded-full bg-black flex items-center justify-center hover:opacity-75 transition">
                         <ChevronRight size={28} className="stroke-white"></ChevronRight>
-                    </button>
-                </div>
-
-                {/* Navigation icons in mobile view */}
-                <div className="flex md:hidden gap-x-2 items-center">
-                    <button onClick={() => { router.push('/') }} className="rounded-full p-2 bg-white flex items-center hover:opacity-75 transition">
-                        <Home className="text-black" size={20}></Home>
-                    </button>
-                    <button onClick={() => { router.push('/search') }} className="rounded-full p-2 bg-white flex items-center hover:opacity-75 transition">
-                        <Search className="text-black" size={20}></Search>
-                    </button>
-                    <button onClick={() => { router.push('/upload') }} className="rounded-full p-2 bg-white flex items-center hover:opacity-75 transition">
-                        <Upload className="text-black" size={20}></Upload>
                     </button>
                 </div>
 
