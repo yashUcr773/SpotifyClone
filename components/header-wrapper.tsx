@@ -68,7 +68,6 @@ export default function HeaderWrapper({ children, className }: HeaderWrapperProp
                                     <DropdownMenuSeparator className="bg-neutral-400/50" />
                                     <DropdownMenuItem className="flex gap-x-2 hover:bg-neutral-700/80 rounded-md cursor-pointer" onClick={myPage}>My Songs</DropdownMenuItem>
                                     <DropdownMenuItem className="flex gap-x-2 hover:bg-neutral-700/80 rounded-md cursor-pointer" onClick={uploadSongs}>Upload Songs</DropdownMenuItem>
-                                    <DropdownMenuItem className="flex gap-x-2 hover:bg-neutral-700/80 rounded-md cursor-pointer">Edit Profile</DropdownMenuItem>
                                     <DropdownMenuSeparator className="bg-neutral-400/50" />
                                     <DropdownMenuItem className="flex gap-x-2 hover:bg-neutral-700/80 rounded-md cursor-pointer" onClick={handleLogout}>Logout</DropdownMenuItem>
                                 </DropdownMenuContent>
