@@ -65,7 +65,7 @@ export default function SongList({ songs, playlists, className, playlist, forceS
     }
 
     const playSongs = (song: Song) => {
-        player.setAllSongs(playlist?.songs!)
+        player.setAllSongs(songs)
         player.setActiveSong(song!)
         player.setActivePlaylist(playlist!)
     }

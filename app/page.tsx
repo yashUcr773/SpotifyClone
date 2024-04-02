@@ -16,7 +16,7 @@ export default async function Home() {
                     <h1 className="text-white text-3xl font-semibold">Welcome Back</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
                         {/* TODO: Extend to get more playlists */}
-                        {playlists?.slice(0,4)?.map(playlist => (
+                        {playlists?.sort((a, b) => b.songs.length - a.songs.length)?.slice(0, 4)?.map(playlist => (
                             <PlaylistItem playlist={playlist}></PlaylistItem>
                         ))}
                     </div>

@@ -6,6 +6,7 @@ export async function POST(req: Request) {
     try {
 
         const currentUser = await getCurrentUser()
+        const { song } = await req.json()
 
         if (!currentUser?.id || !currentUser?.email) {
             return new NextResponse('Unauthorized', { status: 401 })
@@ -20,16 +21,37 @@ export async function POST(req: Request) {
             }
         })
 
-        const newPlaylist = await prisma.playlist.create({
-            data: {
-                name: 'My Playlist #' + (user?.playlists.length! + +1),
-                user: {
-                    connect: {
-                        id: currentUser.id
+        let newPlaylist;
+        if (song) {
+            newPlaylist = await prisma.playlist.create({
+                data: {
+                    name: 'My Playlist #' + (user?.playlists.length! + +1),
+                    user: {
+                        connect: {
+                            id: currentUser.id
+                        }
+                    },
+                    songs: {
+                        connect: {
+                            id: song.id
+                        }
                     }
                 }
-            }
-        })
+            })
+        } else {
+            newPlaylist = await prisma.playlist.create({
+                data: {
+                    name: 'My Playlist #' + (user?.playlists.length! + +1),
+                    user: {
+                        connect: {
+                            id: currentUser.id
+                        }
+                    }
+                }
+            })
+        }
+
+
 
         return NextResponse.json(newPlaylist)
     } catch (e) {
