@@ -29,7 +29,7 @@ export default function SearchInput({ apiUrl, placeholder, className }: SearchIn
             query
         })
         router.push(url)
-    }, [debouncedValue, router])
+    }, [debouncedValue, router, apiUrl])
 
     return (
         <div className={cn("flex-row gap-x-1 items-center justify-center bg-neutral-700 text-white flex w-full rounded-md border border-transparent", className)}>

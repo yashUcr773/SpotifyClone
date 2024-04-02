@@ -1,4 +1,4 @@
-import { Song } from "@/types";
+import { Song } from "@prisma/client";
 import getSongs from "./get-songs";
 import prisma from "@/lib/prisma";
 

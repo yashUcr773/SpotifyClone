@@ -47,7 +47,7 @@ export default function EditSongModal() {
             author: song?.author || "",
             title: song?.title || "",
         })
-    }, [song])
+    }, [form, song])
 
     const isLoading = loading || form.formState.isSubmitting;
 

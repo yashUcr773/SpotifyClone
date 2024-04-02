@@ -43,7 +43,7 @@ export default function EditPlaylistModal() {
             name: playlist?.name,
             description: playlist?.description,
         })
-    }, [playlist])
+    }, [form, playlist])
 
     const isLoading = loading || form.formState.isSubmitting;
 
