@@ -13,6 +13,8 @@ import toast from "react-hot-toast"
 import TooltipWrapper from "./tooltip-wrapper"
 import useAudioPlayer from "@/hooks/use-audio-player"
 import AnimateSoundWaves from "./animate-sound-waves"
+import { Edit, Trash } from "lucide-react"
+import { useModal } from "@/hooks/use-modal"
 
 interface SongListProps {
     songs: Song[]
@@ -22,13 +24,16 @@ interface SongListProps {
     showAddButton?: boolean
     showRemoveButton?: boolean
     forceShow?: boolean
+    showDeleteButton?: boolean
+    showEditButton?: boolean
 }
 
-export default function SongList({ songs, playlists, className, playlist, forceShow = false, showAddButton = false, showRemoveButton = false }: SongListProps) {
+export default function SongList({ songs, playlists, className, playlist, forceShow = false, showAddButton = false, showRemoveButton = false, showDeleteButton, showEditButton }: SongListProps) {
 
     const router = useRouter()
     const player = useAudioPlayer()
     const [isLoading, setIsLoading] = useState(false)
+    const { openModal } = useModal()
 
     if (songs.length === 0) {
         return (
@@ -70,6 +75,15 @@ export default function SongList({ songs, playlists, className, playlist, forceS
         player.setActivePlaylist(playlist!)
     }
 
+    const deleteSong = (song: Song) => {
+        return openModal('deleteSong', { song })
+    }
+
+    const editSong = (song: Song) => {
+        return openModal('editSong', { song })
+
+    }
+
     return (
         <ScrollArea
             className={cn("flex flex-col gap-y-2 min-w-xl w-full bg-neutral-800/50 rounded-lg overflow-auto ", className)}>
@@ -95,6 +109,19 @@ export default function SongList({ songs, playlists, className, playlist, forceS
                                     </Button>
                                 </TooltipWrapper>
                             )}
+                            <div className="gap-x-1 flex flex-row items-center justify-center h-fit w-fit">
+
+                                {showDeleteButton && (
+                                    <TooltipWrapper label="Delete Song">
+                                        <Trash className="cursor-pointer" onClick={() => { deleteSong(song) }}></Trash>
+                                    </TooltipWrapper>
+                                )}
+                                {showEditButton && (
+                                    <TooltipWrapper label="Edit Song">
+                                        <Edit className="cursor-pointer mt-[1px]" onClick={() => { editSong(song) }}></Edit>
+                                    </TooltipWrapper>
+                                )}
+                            </div>
                         </div>
                     </div>
                 )

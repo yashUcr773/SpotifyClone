@@ -10,20 +10,12 @@ import { signOut } from "next-auth/react"
 import UserAvatar from "./user-avatar"
 import toast from "react-hot-toast"
 import useIsAuthenticated from "@/hooks/use-is-authenticated"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu"
 
 interface HeaderWrapperProps {
     children: React.ReactNode,
     className?: string
 }
-
-// TODO: Add some settings for user avatar
-// My songs.
-// Change name, avatar image
-// logout
-// upload songs
-// edit songs?
-// remove songs?
-
 
 export default function HeaderWrapper({ children, className }: HeaderWrapperProps) {
 
@@ -37,6 +29,13 @@ export default function HeaderWrapper({ children, className }: HeaderWrapperProp
         toast.success('Logout successful!')
     }
 
+    const uploadSongs = async () => {
+        router.push('/upload')
+    }
+
+    const myPage = async () => {
+        router.push('/me')
+    }
 
     return (
         <div className={cn("h-fit p-6", className)}>
@@ -53,13 +52,29 @@ export default function HeaderWrapper({ children, className }: HeaderWrapperProp
                 </div>
 
                 {/* Login-logout */}
-                <div className="flex justify-between items-center gap-x-4">
+                <div className="flex flex-row justify-between items-center gap-x-4">
                     {isAuthenticated && (
                         <>
                             <Button onClick={handleLogout} className="px-6 py-4 text-base hover:scale-110" variant={'primary'}>
                                 Logout
                             </Button>
-                            <UserAvatar imageUrl={session?.data?.user?.image!}></UserAvatar>
+
+                            <DropdownMenu >
+                                <DropdownMenuTrigger className="outline-none flex flex-row items-center justify-center">
+                                    <UserAvatar imageUrl={session?.data?.user?.image!}></UserAvatar>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent side={'left'} sideOffset={10} className="mt-10 outline-none flex flex-col bg-neutral-800 text-white shadow-lg border-neutral-400/50 rounded-lg px-4 py-2 overflow-hidden max-h-[360px]">
+                                    <DropdownMenuLabel className="text-base tracking-wide">Logged in as {session.data?.user?.email}</DropdownMenuLabel>
+                                    <DropdownMenuSeparator className="bg-neutral-400/50" />
+                                    <DropdownMenuItem className="flex gap-x-2 hover:bg-neutral-700/80 rounded-md cursor-pointer" onClick={myPage}>My Songs</DropdownMenuItem>
+                                    <DropdownMenuItem className="flex gap-x-2 hover:bg-neutral-700/80 rounded-md cursor-pointer" onClick={uploadSongs}>Upload Songs</DropdownMenuItem>
+                                    <DropdownMenuItem className="flex gap-x-2 hover:bg-neutral-700/80 rounded-md cursor-pointer">Edit Profile</DropdownMenuItem>
+                                    <DropdownMenuSeparator className="bg-neutral-400/50" />
+                                    <DropdownMenuItem className="flex gap-x-2 hover:bg-neutral-700/80 rounded-md cursor-pointer" onClick={handleLogout}>Logout</DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+
+
                         </>
                     )}
                     {!isAuthenticated && (

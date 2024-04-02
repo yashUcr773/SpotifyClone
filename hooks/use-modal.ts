@@ -1,10 +1,11 @@
-import { Playlist } from '@prisma/client';
+import { Playlist, Song } from '@prisma/client';
 import { create } from 'zustand';
 
-export type ModalType = 'signup' | 'signin' | 'editPlaylist' | 'deletePlaylist';
+export type ModalType = 'signup' | 'signin' | 'editPlaylist' | 'deletePlaylist' | 'editSong' | 'deleteSong';
 
 interface ModalData {
     playlist?: Playlist
+    song?: Song
 }
 
 interface ModalStore {

@@ -63,7 +63,7 @@ export default function AddToPlaylistDropdown({ song, playlists }: AddToPlaylist
             <TooltipWrapper label="Add to other Playlists">
                 <DropdownMenuTrigger asChild>
                     {
-                        playlists.some(playlist => playlist.songs.some(s => s.id === song.id)) ?
+                        playlists?.some(playlist => playlist.songs.some(s => s.id === song.id)) ?
                             (
                                 <button className="p-2 md:p-4 text-green-500 fill-green-500"><CircleCheck></CircleCheck></button>
                             ) :
@@ -81,7 +81,7 @@ export default function AddToPlaylistDropdown({ song, playlists }: AddToPlaylist
                 <div className="flex overflow-hidden">
                     <ScrollArea className="overflow-auto w-[280px] flex flex-col gap-y-2 pr-4">
                         {
-                            playlists.map(playlist => (
+                            playlists?.map(playlist => (
                                 <SearchPlaylistItem key={playlist.id} onChange={onChange} playlist={playlist} song={song}></SearchPlaylistItem>
                             ))
                         }

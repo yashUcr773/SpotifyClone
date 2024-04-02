@@ -12,6 +12,7 @@ interface PlaylistPageHeaderProps {
     playlist: PlaylistWithSongsAndUsers
 }
 
+// TODO: Make bg color same as max color of cover
 export default function PlaylistPageHeader({ playlist }: PlaylistPageHeaderProps) {
 
     const { openModal } = useModal()

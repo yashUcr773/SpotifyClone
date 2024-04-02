@@ -44,3 +44,56 @@ export async function GET(req: Request) {
         return new NextResponse('Internal Server Error', { status: 500 })
     }
 }
+
+export async function DELETE(req: Request) {
+    try {
+
+        const currentUser = await getCurrentUser()
+        const { searchParams } = new URL(req.url)
+        const songId = searchParams.get('songId')
+
+        if (!currentUser?.id || !currentUser?.email) {
+            return new NextResponse('Unauthorized', { status: 401 })
+        }
+
+        const deletedSong = await prisma.song.delete({
+            where: {
+                id: songId!,
+                uploaderId: currentUser.id
+            }
+        })
+
+        return NextResponse.json(deletedSong)
+    } catch (e) {
+        console.log(e)
+        return new NextResponse('Internal Server Error', { status: 500 })
+    }
+}
+
+export async function PATCH(req: Request) {
+    try {
+
+        const currentUser = await getCurrentUser()
+        const body = await req.json()
+        const { image_path, song_path, author, title, songId } = body
+
+        if (!currentUser?.id || !currentUser?.email) {
+            return new NextResponse('Unauthorized', { status: 401 })
+        }
+
+        const updatedSong = await prisma.song.update({
+            where: {
+                id: songId,
+                uploaderId: currentUser.id
+            },
+            data: {
+                image_path, song_path, title, author,
+            }
+        })
+
+        return NextResponse.json(updatedSong)
+    } catch (e) {
+        console.log(e)
+        return new NextResponse('Internal Server Error', { status: 500 })
+    }
+}

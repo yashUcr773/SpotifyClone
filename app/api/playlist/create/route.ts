@@ -25,7 +25,7 @@ export async function POST(req: Request) {
         if (song) {
             newPlaylist = await prisma.playlist.create({
                 data: {
-                    name: 'My Playlist #' + (user?.playlists.length! + +1),
+                    name: 'My Playlist #' + (user?.playlists?.length! + +1),
                     user: {
                         connect: {
                             id: currentUser.id
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
         } else {
             newPlaylist = await prisma.playlist.create({
                 data: {
-                    name: 'My Playlist #' + (user?.playlists.length! + +1),
+                    name: 'My Playlist #' + (user?.playlists?.length! + +1),
                     user: {
                         connect: {
                             id: currentUser.id

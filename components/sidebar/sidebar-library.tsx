@@ -17,7 +17,6 @@ import { Button } from "../ui/button"
 interface SidebarLibraryProps {
     playlists: PlaylistWithSongsAndUsers[]
 }
-// TODO: Add toggle to minimize and maximize the library on click. Show playlist covers in case of minimize
 export default function SidebarLibrary({ playlists }: SidebarLibraryProps) {
 
     const router = useRouter()
@@ -80,7 +79,7 @@ export default function SidebarLibrary({ playlists }: SidebarLibraryProps) {
             </DropdownMenu>
 
             <ScrollArea className="mt-8 h-fit overflow-y-auto">
-                {playlists.map(playlist => (
+                {playlists?.map(playlist => (
                     <SidebarLibraryPlaylistItem key={playlist.id} playlist={playlist}></SidebarLibraryPlaylistItem>
                 ))}
             </ScrollArea>
