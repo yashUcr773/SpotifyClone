@@ -26,10 +26,10 @@ export default function SidebarLibraryPlaylistItem({ playlist }: SidebarLibraryP
             <PlaylistCover iconSize={24} coverSize={12} playlist={playlist} suppressModal></PlaylistCover>
             <div className="hidden md:flex flex-col gap-y-1">
                 <span className={cn("text-white", player.activePlaylist?.id === playlist.id && "text-green-400")}>{playlist.name}</span>
-                <div className="flex text-white gap-x-1">
-                    <span className="text-white">{playlist.songs.length} songs</span>
+                <div className="flex text-white gap-x-1 justify-center items-center">
+                    <span className="text-white text-xs">{playlist.songs.length} songs</span>
                     .
-                    <span className="text-white">{playlist.user.name}</span>
+                    <span className="text-white text-xs">{playlist.user.name}</span>
                 </div>
             </div>
             {
