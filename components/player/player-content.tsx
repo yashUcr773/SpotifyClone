@@ -27,8 +27,7 @@ export default function PlayerContent({ playlists }: PlayerContentProps) {
 
             <div className="flex w-fit items-center">
                 <div className="flex items-center">
-                    <div className="max-w-[120px] lg:max-w-full">
-
+                    <div className="w-[120px] lg:w-[240px]">
                     <MediaItem data={player.activeSong!}></MediaItem>
                     </div>
                     <AddToPlaylistDropdown playlists={playlists} song={player.activeSong}></AddToPlaylistDropdown>

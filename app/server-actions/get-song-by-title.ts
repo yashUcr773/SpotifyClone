@@ -11,7 +11,10 @@ export default async function getSongsByTitle(title: string): Promise<Song[]> {
     try {
         const songs = await prisma.song.findMany({
             where: {
-                title: { contains: title, mode: 'insensitive' }
+                OR: [
+                    { title: { contains: title, mode: 'insensitive' } },
+                    { author: { contains: title, mode: 'insensitive' } },
+                ]
             },
             orderBy: {
                 createdAt: 'desc'

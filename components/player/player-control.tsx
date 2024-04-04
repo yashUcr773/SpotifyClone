@@ -82,13 +82,16 @@ export default function PlayerControl({ volume }: PlayerControlProps) {
         }
     }
     const formatTime = (seconds: number) => {
+        if (!seconds) {
+            return '00:00';
+        }
         let minutes = Math.round(Math.floor(seconds / 60))
         let remainingSeconds = Math.round(seconds % 60);
         // Add leading zero if necessary
         let nminutes = minutes < 10 ? '0' + minutes : minutes;
         let nremainingSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
         return nminutes + ':' + nremainingSeconds;
-      }
+    }
 
 
     return (
