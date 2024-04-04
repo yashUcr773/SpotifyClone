@@ -63,5 +63,7 @@ Ensure you have the following environment variables set up:
 - [ ] Store last played to resume on reload.
 - [ ] Album and artist functionality.
 - [ ] Move from UploadThing to self-hosted S3 to bypass storage limits.
+- [ ] Add infinite loader for songs instead of loading all at once
+- [ ] Add visual feedback to show which song is playing on home page
 
 Feel free to contribute and enhance the project!
