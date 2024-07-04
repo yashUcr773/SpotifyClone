@@ -2,6 +2,11 @@
 
 Demo - [spotifyclone.uk](https://spotifyclone.uk)
 
+Test Account
+- Email - demouser@mailsac.com
+- Password - demo_user_1
+- Username - demouser1
+
 Welcome to the Spotify Clone project! This project aims to replicate some of the core functionalities of Spotify, allowing users to listen to music, create playlists, upload songs, and much more. Below you'll find details on its functionality, the technology stack used, how to run it locally, environment variables needed, attribution, and planned features.
 
 ## Functionality
