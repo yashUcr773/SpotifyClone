@@ -14,6 +14,8 @@ import { useState } from "react"
 import { signIn } from "next-auth/react"
 import toast from "react-hot-toast"
 import { AUTH_MODAL_SOCIALS } from "@/types"
+import { useRouter } from "next/navigation"
+import DemoUserCreds from "./DemoUserCreds"
 
 
 const formSchema = z.object({
@@ -25,6 +27,7 @@ export default function SigninModal() {
     const { closeModal, openModal, isOpen, type } = useModal()
     const isModalOpen = isOpen && type === 'signin'
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -49,6 +52,7 @@ export default function SigninModal() {
             if (result?.ok && !result?.error) {
                 toast.success('Log in Successful!')
                 form.reset()
+                router.refresh()
                 closeModal()
             }
         } catch (e) {
@@ -69,6 +73,7 @@ export default function SigninModal() {
             if (result?.ok && !result?.error) {
                 toast.success('Log in Successful!')
                 form.reset()
+                router.refresh()
                 closeModal()
             }
         } catch (e) {
@@ -136,6 +141,7 @@ export default function SigninModal() {
                         Signup
                     </div>
                 </div>
+                <DemoUserCreds></DemoUserCreds>
             </DialogContent>
         </Dialog>
     )

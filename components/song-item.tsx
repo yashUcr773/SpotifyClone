@@ -22,7 +22,7 @@ export default function SongItem({ song, songs }: SongItemProps) {
         <div
             className="relative group flex flex-col items-center justify-center rounded-md overflow-hidden gap-x-4 cursor-pointer  hover:bg-neutral-400/25 transition px-4 py-4">
             <div className="relative aspect-square w-full h-full rounded-md overflow-hidden">
-                <Image className="object-cover" src={song.image_path || ""} fill alt={song.title} />
+                <Image className="object-cover" src={song.image_path || ""} fill sizes="100px" alt={song.title} />
             </div>
             <div className="flex flex-col items-start w-full p-2 gap-y-1" >
                 <p className="text-white font-medium truncate w-full tracking-wider">{song.title}</p>

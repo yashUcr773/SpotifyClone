@@ -16,6 +16,7 @@ import { signIn } from 'next-auth/react'
 import { useState } from "react"
 import { AUTH_MODAL_SOCIALS } from "@/types"
 import { useRouter } from "next/navigation"
+import DemoUserCreds from "./DemoUserCreds"
 
 const formSchema = z.object({
     firstname: z.string().min(1, { message: 'Firstname is required' }),
@@ -64,6 +65,7 @@ export default function SignupModal() {
             }
             if (result?.ok && !result?.error) {
                 toast.success('Log in Successful!')
+                router.refresh()
             }
 
             router.refresh()
@@ -90,6 +92,7 @@ export default function SignupModal() {
             if (result?.ok && !result?.error) {
                 toast.success('Log in Successful!')
                 form.reset()
+                router.refresh()
                 closeModal()
             }
         } catch (e) {
@@ -158,6 +161,8 @@ export default function SignupModal() {
                         Login
                     </div>
                 </div>
+                <DemoUserCreds></DemoUserCreds>
+
             </DialogContent>
         </Dialog>
     )

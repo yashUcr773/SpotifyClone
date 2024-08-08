@@ -19,7 +19,7 @@ export default function FileUploader({ endpoint, onChange, value }: FileUploader
     if (value && fileType !== 'mp3') {
         return (
             <div className='relative h-48 w-48 m-4'>
-                <Image fill src={value} alt="Upload" className='rounded-full'></Image>
+                <Image fill src={value} alt="Upload" className='rounded-full' sizes="100px"></Image>
                 <button onClick={() => onChange("")} className='bg-rose-500 text-white p-1 rounded-full absolute top-4 right-4 shadow-sm' type='button'>
                     <X className='h-4 w-4'></X>
                 </button>
