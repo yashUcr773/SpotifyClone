@@ -8,6 +8,8 @@ interface AnimateSoundWavesProps {
 }
 export default function AnimateSoundWaves({ song, animate, onClick }: AnimateSoundWavesProps) {
 
+    const bars = Array.from({ length: 5 }, (_, index) => index);
+
     if (!animate) {
         return (
             <div className="w-12 h-12 shrink-0 flex flex-row items-center justify-center ">
@@ -18,7 +20,6 @@ export default function AnimateSoundWaves({ song, animate, onClick }: AnimateSou
         )
     }
 
-    const bars = Array.from({ length: 5 }, (_, index) => index);
 
     return (
         <div className="w-12 h-12 shrink-0 flex flex-row items-center justify-center ">
