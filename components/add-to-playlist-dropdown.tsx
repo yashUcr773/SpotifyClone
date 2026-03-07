@@ -7,7 +7,7 @@ import { Button } from "./ui/button"
 import { PlaylistWithSongsAndUsers } from "@/types"
 import { useRouter } from "next/navigation"
 import axios from "axios"
-import { Song } from "@prisma/client"
+import { Song } from "@/prisma/generated/prisma/client";
 import TooltipWrapper from "./tooltip-wrapper"
 import toast from "react-hot-toast"
 import { useModal } from "@/hooks/use-modal"

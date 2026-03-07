@@ -2,7 +2,7 @@
 import { PlaylistWithSongsAndUsers } from "@/types"
 import PlaylistCover from "../playlist-cover"
 import { Checkbox } from "../ui/checkbox"
-import { Song } from "@prisma/client"
+import { Song } from "@/prisma/generated/prisma/client";
 import { useState } from "react"
 
 interface SearchPlaylistItemProps {

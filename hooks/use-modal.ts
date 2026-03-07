@@ -1,4 +1,4 @@
-import { Playlist, Song } from '@prisma/client';
+import { Playlist, Song } from "@/prisma/generated/prisma/client";
 import { create } from 'zustand';
 
 export type ModalType = 'signup' | 'signin' | 'editPlaylist' | 'deletePlaylist' | 'editSong' | 'deleteSong';

@@ -1,4 +1,4 @@
-import { Playlist, Song, User } from "@prisma/client";
+import { Playlist, Song, User } from "@/prisma/generated/prisma/client";
 
 export type AUTH_MODAL_SOCIALS = 'github' | 'google'
 

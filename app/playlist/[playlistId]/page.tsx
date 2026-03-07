@@ -8,19 +8,21 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { redirect } from "next/navigation";
 
 interface PlaylistIdPageProps {
-    searchParams: {
-        title: string
-    }
-    params: {
-        playlistId: string
-    }
+    searchParams: Promise<{
+        title?: string;
+    }>;
+    params: Promise<{
+        playlistId: string;
+    }>;
 }
 
 // TODO: Add page loaders / skeletons
 export default async function PlaylistIdPage({ searchParams, params }: PlaylistIdPageProps) {
 
-    const playlist = await getPlaylist(params.playlistId)
-    const songs = await getSongsByTitle(searchParams.title)
+    const { playlistId } = await params;
+    const { title } = await searchParams;
+    const playlist = await getPlaylist(playlistId)
+    const songs = await getSongsByTitle(title!)
     const playlists = await getUserPlaylists()
 
     if (!playlist) {
@@ -32,7 +34,7 @@ export default async function PlaylistIdPage({ searchParams, params }: PlaylistI
             <HeaderWrapper className="bg-gradient-to-b from-violet-700 ">
                 <PlaylistPageHeader playlist={playlist}></PlaylistPageHeader>
             </HeaderWrapper>
-            <PlaylistPageBody params={params} playlist={playlist} playlists={playlists!} songs={songs}></PlaylistPageBody>
+            <PlaylistPageBody params={{ playlistId }} playlist={playlist} playlists={playlists!} songs={songs}></PlaylistPageBody>
         </ScrollArea >
     )
 }

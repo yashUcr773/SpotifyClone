@@ -1,4 +1,4 @@
-import { Song } from "@prisma/client";
+import { Song } from "@/prisma/generated/prisma/client";
 import PlayButton from "./play-button";
 
 interface AnimateSoundWavesProps {

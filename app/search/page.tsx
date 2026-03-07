@@ -6,14 +6,15 @@ import getUserPlaylists from "../server-actions/get-user-playlists";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface SearchPageProps {
-    searchParams: {
+    searchParams: Promise<{
         title: string
-    }
+    }>
 }
 
 // TODO: Add infinite loader with tanstack query
 export default async function SearchPage({ searchParams }: SearchPageProps) {
-    const songs = await getSongsByTitle(searchParams.title)
+    const { title } = await searchParams;
+    const songs = await getSongsByTitle(title)
     const playlists = await getUserPlaylists()
 
 

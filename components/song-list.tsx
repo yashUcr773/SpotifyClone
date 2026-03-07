@@ -1,5 +1,5 @@
 "use client"
-import { Song } from "@prisma/client"
+import { Song } from "@/prisma/generated/prisma/client";
 import MediaItem from "./media-item"
 import { PlaylistWithSongsAndUsers } from "@/types"
 import AddToPlaylistDropdown from "./add-to-playlist-dropdown"

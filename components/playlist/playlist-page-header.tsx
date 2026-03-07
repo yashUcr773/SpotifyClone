@@ -32,7 +32,7 @@ export default function PlaylistPageHeader({ playlist }: PlaylistPageHeaderProps
                 <span className="text-white text-sm">Playlist</span>
                 <h1 className="text-white text-2xl md:text-4xl lg:text-6xl font-semibold">{playlist?.name}</h1>
                 <span className="text-white text-xs">{playlist.description}</span>
-                <span className="text-white text-xs">{playlist.user.name}  {playlist.songs.length > 0 ?? " . " + playlist.songs.length + " Songs"}</span>
+                <span className="text-white text-xs">{playlist.user.name}  {playlist.songs.length > 0 && " . " + playlist.songs.length + " Songs"}</span>
             </div>
             <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 top-0 right-0">
                 <TooltipWrapper label="Edit">

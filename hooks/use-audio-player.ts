@@ -1,5 +1,5 @@
 import { PlaylistWithSongsAndUsers } from "@/types"
-import { Song } from "@prisma/client"
+import { Song } from "@/prisma/generated/prisma/client";
 import { create } from "zustand"
 
 interface AudioPlayerStore {

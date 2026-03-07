@@ -1,5 +1,5 @@
 "use client"
-import { Song } from "@prisma/client";
+import { Song } from "@/prisma/generated/prisma/client";
 import SongList from "../song-list";
 import SearchInput from "../search/search-input";
 import { PlaylistWithSongsAndUsers } from "@/types";

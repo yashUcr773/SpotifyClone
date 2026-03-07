@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import PlayButton from "./play-button"
-import { Song } from "@prisma/client"
+import { Song } from "@/prisma/generated/prisma/client";
 import useAudioPlayer from "@/hooks/use-audio-player"
 
 interface SongItemProps {

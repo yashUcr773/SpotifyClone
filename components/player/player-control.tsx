@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import PlayerSeekbarControl from "./player-seekbar-control"
-import { Song } from "@prisma/client";
 import useAudioPlayer from "@/hooks/use-audio-player";
 import { Pause, Play, Shuffle, SkipBack, SkipForward } from "lucide-react";
 import { cn } from "@/lib/utils";

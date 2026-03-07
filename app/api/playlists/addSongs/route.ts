@@ -1,6 +1,6 @@
 import getCurrentUser from "@/app/server-actions/get-current-user"
 import prisma from "@/lib/prisma"
-import { Playlist } from "@prisma/client"
+import { Playlist } from "@/prisma/generated/prisma/client"
 import { NextResponse } from "next/server"
 
 export async function POST(req: Request) {
