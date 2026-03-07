@@ -51,7 +51,7 @@ Ensure you have the following environment variables set up:
 - `NEXTAUTH_SECRET`: Secret key for NextAuth.
 - `GITHUB_ID` and `GITHUB_SECRET`: Client ID and secret for GitHub OAuth.
 - `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`: Client ID and secret for Google OAuth.
-- `UPLOADTHING_SECRET` and `UPLOADTHING_APP_ID`: Secret and App ID for UploadThing.
+- `UPLOADTHING_TOKEN`: Secret and App ID for UploadThing.
 
 ## Attribution
 
